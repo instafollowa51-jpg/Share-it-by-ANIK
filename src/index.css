@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  :root {
+    --bg-primary: #F8FAFC;
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    
+    --glass-bg: rgba(255, 255, 255, 0.40);
+    --glass-border: rgba(255, 255, 255, 0.80);
+    --glass-shadow: rgba(79, 70, 229, 0.08);
+    --glass-shadow-inner: rgba(255, 255, 255, 0.50);
+  }
+
+  .dark {
+    --bg-primary: #020617;
+    --text-primary: #F8FAFC;
+    --text-secondary: #94A3B8;
+
+    --glass-bg: rgba(15, 23, 42, 0.30);
+    --glass-border: rgba(255, 255, 255, 0.05);
+    --glass-shadow: rgba(0, 0, 0, 0.30);
+    --glass-shadow-inner: transparent;
+  }
+
+  body {
+    @apply bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans antialiased transition-colors duration-500 ease-in-out min-h-screen overflow-x-hidden;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px var(--glass-shadow), inset 0 1px 1px var(--glass-shadow-inner);
+  }
+  
+  .glass-pill {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 1px var(--glass-shadow-inner);
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#6366F1] via-[#A855F7] to-[#EC4899];
+  }
+
+  /* Liquid background orbs */
+  .orb-1, .orb-2 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    opacity: 0.5;
+    animation: float 20s infinite ease-in-out alternate;
+  }
+
+  .orb-1 {
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle at center, rgba(99, 102, 241, 0.4) 0%, rgba(168, 85, 247, 0) 70%);
+    top: -10vw;
+    left: -10vw;
+    animation-delay: 0s;
+  }
+
+  .orb-2 {
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle at center, rgba(236, 72, 153, 0.3) 0%, rgba(236, 72, 153, 0) 70%);
+    bottom: -10vw;
+    right: -10vw;
+    animation-delay: -10s;
+  }
+
+  .dark .orb-1 {
+    background: radial-gradient(circle at center, rgba(99, 102, 241, 0.25) 0%, rgba(168, 85, 247, 0) 70%);
+  }
+
+  .dark .orb-2 {
+    background: radial-gradient(circle at center, rgba(236, 72, 153, 0.2) 0%, rgba(236, 72, 153, 0) 70%);
+  }
+
+  @keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(5vw, 5vw) scale(1.1); }
+    100% { transform: translate(-5vw, 10vw) scale(0.9); }
+  }
+}
